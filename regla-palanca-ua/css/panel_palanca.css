@@ -1,0 +1,492 @@
+/* ===============================
+   VARIABLES
+================================ */
+:root {
+    --azul-oscuro: #0b2c5d;
+    --azul-principal: #1f4fa3;
+    --azul-claro: #e8f0ff;
+    --blanco: #ffffff;
+    --gris-texto: #333333;
+    --naranja-acento: #f08a24;
+    --sombra-suave: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(180deg, #1f4fa3 0%, #cfdcff 100%);
+    color: var(--gris-texto);
+    min-height: 100vh;
+}
+
+/* ENCABEZADO */
+.encabezado {
+    text-align: center;
+    padding: 40px 20px 30px;
+    color: var(--blanco);
+}
+
+.logo-universidad {
+    max-width: 220px;
+    width: 100%;
+}
+
+.titulo-principal {
+    font-size: 2rem;
+}
+
+/* CONTENEDOR */
+.contenedor-principal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px 60px;
+}
+
+/* PANELES */
+.panel {
+    background: var(--blanco);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: var(--sombra-suave);
+}
+
+/* FORMULARIO */
+.grupo-campo {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.grupo-campo label {
+    font-size: 0.9rem;
+}
+
+.grupo-campo input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border-radius: 8px;
+    border: 1px solid #cfdcff;
+}
+
+.unidad {
+    position: absolute;
+    right: 12px;
+    top: 36px;
+}
+
+/* BOTÓN */
+#btn-calcular {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--azul-principal), var(--azul-oscuro));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* RESULTADOS */
+.resultado {
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.resultado-alpha {
+    background: #eef4ff;
+}
+
+.resultado-beta {
+    background: #fff2e5;
+}
+
+/* MENSAJE ERROR */
+.mensaje-error {
+    display: none;
+    margin: 10px 0;
+    padding: 10px;
+    background: #ffecec;
+    color: #b00020;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.mensaje-error.activo {
+    display: block;
+}
+
+/* DESARROLLO */
+.desarrollo-calculo {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #f4f7ff;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.desarrollo-calculo.activo {
+    display: block;
+}
+
+.desarrollo-calculo pre {
+    white-space: pre-wrap;
+    font-family: Consolas, monospace;
+}
+
+/* FOOTER */
+.pie-pagina {
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-principal));
+    color: white;
+    font-size: 0.85rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .contenedor-principal {
+        grid-template-columns: 1fr;
+    }
+}
+/* ===== EXPLICACIÓN COLAPSABLE ===== */
+
+.explicacion-palanca {
+    margin-top: 20px;
+}
+
+.btn-explicacion {
+    background-color: #004080;
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-explicacion:hover {
+    background-color: #002f5e;
+}
+
+.contenido-explicacion {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    display: none;
+}
+
+.contenido-explicacion h3 {
+    margin-top: 0;
+}
+
+.formula {
+    font-family: "Courier New", monospace;
+    background-color: #eee;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+/* ===== DIAGRAMA REGLA DE LA PALANCA ===== */
+
+.diagrama-palanca {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.barra-palanca {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 12px;
+    background-color: #ccc;
+    border-radius: 6px;
+    margin: 25px 10px;
+}
+
+.fase {
+    font-size: 0.85rem;
+    position: absolute;
+    top: -25px;
+}
+
+.alfa {
+    left: 0;
+    color: #1f4fa3;
+}
+
+.beta {
+    right: 0;
+    color: #f08a24;
+}
+
+.punto.c0 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -30px;
+    font-weight: bold;
+    color: #000;
+}
+
+.punto.c0::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 18px;
+    background-color: #000;
+}
+
+.nota-diagrama {
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 10px;
+}
+/* ===== MENSAJE DE ERROR ===== */
+.mensaje-error {
+    color: #c0392b;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.mensaje-error.activo {
+    display: block;
+}
+
+/* ===== BLOQUE EXPLICACIÓN ===== */
+.btn-explicacion {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background: #e8f0ff;
+    color: #1f4fa3;
+}
+
+.bloque-explicacion {
+    display: none;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.bloque-explicacion.activo {
+    display: block;
+}
+
+.cita {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #555;
+}
+/* ===============================
+   EJEMPLO VISUAL – REGLA DE LA PALANCA
+================================ */
+.ejemplo-visual {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 14px;
+    background: #f4f8ff;
+    box-shadow: inset 0 0 0 1px #d6e2ff;
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+.ejemplo-visual.activo {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.titulo-ejemplo {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--azul-oscuro);
+}
+
+/* Barra */
+.barra-palanca {
+    position: relative;
+    height: 8px;
+    background: linear-gradient(to right, #1f4fa3, #f08a24);
+    border-radius: 10px;
+    margin: 25px 0 15px;
+}
+
+/* Puntos */
+.fase {
+    position: absolute;
+    top: -10px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--azul-oscuro);
+    transform: translateX(-50%);
+}
+
+.fase.alfa { left: 0%; }
+.fase.beta { left: 100%; }
+
+.fase.c0 {
+    background: var(--naranja-acento);
+}
+
+/* Etiquetas */
+.etiquetas-palanca {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--gris-texto);
+}
+
+.etiquetas-palanca span {
+    font-weight: 500;
+}
+/* ===============================
+   VISUAL REGLA DE LA PALANCA
+================================ */
+
+.visual-palanca {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 14px;
+    background: #f5f8ff;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.5s ease;
+    display: none;
+}
+
+.visual-palanca.activo {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.titulo-visual {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: var(--azul-oscuro);
+}
+
+.barra-contenedor {
+    width: 100%;
+}
+
+.barra-total {
+    width: 100%;
+    height: 26px;
+    background: #dbe5ff;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+}
+
+.barra-alpha {
+    height: 100%;
+    background: linear-gradient(135deg, #1f4fa3, #3f6fdc);
+    width: 0%;
+    transition: width 0.8s ease;
+}
+
+.barra-beta {
+    height: 100%;
+    background: linear-gradient(135deg, #f08a24, #ffb366);
+    width: 0%;
+    transition: width 0.8s ease;
+}
+
+.etiquetas-visual {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #555;
+}
+/* ===== BOTÓN DE IDIOMAS – ESTILO LIQUID GLASS ===== */
+
+.language-selector {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.lang-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2),
+                inset 0 0 10px rgba(255,255,255,0.2);
+
+    font-size: 24px;
+
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    transform: scale(1.1);
+}
+
+.lang-menu {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-radius: 12px;
+    padding: 10px;
+    display: none;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.lang-menu div {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    color: #0b2c5d;
+    font-weight: 500;
+}
+
+.lang-menu div:hover {
+    background: rgba(255,255,255,0.4);
+}
+
+.lang-menu.activo {
+    display: block;
+}

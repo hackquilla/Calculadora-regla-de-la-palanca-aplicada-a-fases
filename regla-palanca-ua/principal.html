@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculadora – Regla de la Palanca</title>
+
+    <link rel="stylesheet" href="css/panel_palanca.css">
+</head>
+<body>
+
+<header class="encabezado">
+    <div class="contenedor-logo">
+        <img src="img/logo_uniatlantico.png"
+             alt="Universidad del Atlántico"
+             class="logo-universidad">
+    </div>
+
+<h1 data-i18n="titulo">Calculadora – Regla de la Palanca</h1>
+
+</header>
+
+<main class="contenedor-principal">
+
+    <!-- PANEL ENTRADA -->
+    <section class="panel panel-entrada">
+        <h2 class="titulo-panel" data-i18n="datos_entrada">Datos de entrada</h2>
+
+
+        <form>
+            <div class="grupo-campo">
+               <label for="c0" data-i18n="label_c0">Composición total del sistema (C₀)</label>
+
+                <input type="number" id="c0" step="any">
+                <span class="unidad">%</span>
+            </div>
+
+            <div class="grupo-campo">
+                <label for="ca" data-i18n="label_ca">Composición de la fase α (Cα)</label>
+
+                <input type="number" id="ca" step="any">
+                <span class="unidad">%</span>
+            </div>
+
+            <div class="grupo-campo">
+                <label for="cb" data-i18n="label_cb">Composición de la fase β (Cβ)</label>
+
+                <input type="number" id="cb" step="any">
+                <span class="unidad">%</span>
+            </div>
+
+            <p id="mensaje-error" class="mensaje-error"></p>
+
+            <button type="button" id="btn-calcular" data-i18n="btn_calcular">
+    Calcular
+</button>
+
+        </form>
+        <!-- === VISUALIZACIÓN REGLA DE LA PALANCA === -->
+<div id="visual-palanca" class="visual-palanca">
+
+    <h3 class="titulo-visual" data-i18n="titulo_visual">Representación visual</h3>
+
+
+    <div class="barra-contenedor">
+        <div class="barra-total">
+            <div class="barra-alpha" id="barra-alpha"></div>
+            <div class="barra-beta" id="barra-beta"></div>
+        </div>
+    </div>
+
+    <div class="etiquetas-visual">
+    <span data-i18n="fase_alpha">Fase α</span>
+    <span data-i18n="fase_beta">Fase β</span>
+</div>
+
+
+</div>
+
+    </section>
+
+    <!-- PANEL RESULTADOS -->
+    <section class="panel panel-resultados">
+        <h2 class="titulo-panel" data-i18n="resultados">Resultados</h2>
+
+        <div class="resultado resultado-alpha">
+            <h3 data-i18n="fraccion_alpha">Fracción fase α</h3>
+            <p id="resultado-alpha">-- %</p>
+        </div>
+
+        <div class="resultado resultado-beta">
+            <h3 data-i18n="fraccion_beta">Fracción fase β</h3>
+            <p id="resultado-beta">-- %</p>
+        </div>
+
+        <button class="btn-explicacion" id="btn-explicacion" data-i18n="btn_explicacion">
+    Ver explicación del cálculo
+</button>
+
+        <!-- BLOQUE EXPLICACIÓN -->
+        <div class="bloque-explicacion" id="bloque-explicacion">
+
+            <h3 data-i18n="exp_titulo">Cálculo mediante la Regla de la Palanca</h3>
+
+           <p data-i18n="exp_p1">
+    La regla de la palanca es un método fundamental en la ciencia
+    e ingeniería de materiales que permite determinar la fracción
+    en masa de las fases presentes en un sistema bifásico en equilibrio,
+    a partir de un diagrama de fases.
+</p>
+
+           <p data-i18n="exp_p2">
+    Este método se aplica cuando la composición global del sistema
+    (C₀) se encuentra entre las composiciones de equilibrio de las
+    fases α (Cα) y β (Cβ) a una temperatura determinada. Bajo estas
+    condiciones, el sistema se separa en dos fases cuyas proporciones
+    relativas pueden calcularse utilizando relaciones geométricas
+    derivadas del diagrama de fases.
+</p>
+
+            <p><strong data-i18n="exp_intro_formulas">Las fracciones de cada fase se calculan mediante:</strong></p>
+
+            <p class="formula">
+                f<sub>α</sub> = (C<sub>β</sub> − C<sub>0</sub>) / (C<sub>β</sub> − C<sub>α</sub>)
+            </p>
+
+            <p class="formula">
+                f<sub>β</sub> = (C<sub>0</sub> − C<sub>α</sub>) / (C<sub>β</sub> − C<sub>α</sub>)
+            </p>
+
+          <p data-i18n="exp_p3">
+    Estas fracciones representan la proporción relativa de cada fase
+    en el sistema, cumpliéndose que:
+</p>
+
+            <p class="formula">
+                f<sub>α</sub> + f<sub>β</sub> = 1
+            </p>
+
+            <p data-i18n="exp_p4">
+    El nombre “regla de la palanca” proviene de la analogía con una
+    palanca mecánica, donde el punto correspondiente a la composición
+    global C₀ actúa como fulcro.
+</p>
+
+            <!-- CITACIÓN -->
+            <div class="cita">
+                <p data-i18n="cita_intro">
+    Si se desea citar esta herramienta o el contenido académico
+    presentado, se puede utilizar la siguiente referencia:
+</p>
+
+                <p><strong data-i18n="cita_formato">Formato sugerido (APA – adaptado):</strong></p>
+
+
+                <p>
+                    Fábregas, C., & Gómez, M. (2026).
+                    <em>Calculadora de la regla de la palanca aplicada a diagramas de fases</em>.
+                    Universidad del Atlántico. Uso académico.
+                </p>
+
+                <p><strong data-i18n="cita_corta">Citación corta en el texto:</strong></p>
+
+
+                <p>(Fábregas & Gómez, 2026)</p>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer class="pie-pagina">
+   <p data-i18n="footer">
+    Desarrollado por Christian Fábregas y Manuel Gómez<br>
+    Ingeniería Mecánica – Universidad del Atlántico<br>
+    © 2026 – Uso académico
+</p>
+</footer>
+<!-- BOTÓN DE IDIOMAS -->
+<div class="language-selector">
+    <button class="lang-btn" onclick="toggleLangMenu()">
+        🌐
+    </button>
+
+    <div class="lang-menu" id="langMenu">
+        <div onclick="setLanguage('es')">ES – Español</div>
+        <div onclick="setLanguage('en')">EN – English</div>
+        <div onclick="setLanguage('pt')">PT – Português</div>
+        <div onclick="setLanguage('it')">IT – Italiano</div>
+    </div>
+</div>
+
+<script src="js/calculadora_palanca.js"></script>
+</body>
+</html>
